@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curve Processor</title>
+    <style>
+        body {
+            font-family: 'Verdana', sans-serif;
+            background-color: #f0f0f0;  /* Light background */
+            color: #2c3e50;  /* Dark text color */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 600px;
+            width: 100%;
+            padding: 25px;
+            background-color: #ffffff;  /* White container */
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);  /* Softer shadow */
+            text-align: center;
+            border: 2px solid #e0e0e0;  /* Light border */
+        }
+
+        h1 {
+            margin-bottom: 25px;
+            font-size: 26px;
+            color: #e74c3c;  /* Bright red color for headings */
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        label {
+            font-size: 15px;
+            display: block;
+            margin-bottom: 5px;
+            color: #7f8c8d;  /* Subtle gray color for labels */
+        }
+
+        input[type="file"], select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border: 1px solid #bdc3c7;  /* Light gray border */
+            background-color: #ecf0f1;  /* Very light gray background */
+            color: #2c3e50;  /* Dark text color */
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #8e44ad;  /* Purple button color */
+            color: #fff;
+            padding: 12px 24px;
+            text-align: center;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #732d91;  /* Darker purple on hover */
+        }
+
+        .result {
+            margin-top: 25px;
+        }
+
+        .image-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .curve-img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            border: 3px solid #e74c3c;  /* Bright red border */
+        }
+
+        .result a {
+            margin-top: 15px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Curve Processor</h1>
+        <form action="/" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="file">Upload CSV File:</label>
+                <input type="file" name="file" id="file" required>
+            </div>
+            <div class="form-group">
+                <label for="process_type">Select Process Type:</label>
+                <select name="process_type" id="process_type" required>
+                    <option value="regularize">Regularize Curves</option>
+                    <option value="symmetry">Explore Symmetry</option>
+                    <option value="complete">Complete Curves</option>
+                </select>
+            </div>
+            <button type="submit" class="btn">Process</button>
+        </form>
+
+        {% if processed_file %}
+        <div class="result">
+            <h2>Processed File:</h2>
+            <p><a href="{{ url_for('download_file', filename=processed_file) }}" class="btn">Download Csv File For TestCases</a></p>
+        </div>
+        {% endif %}
+
+        {% if plot_image %}
+        <div class="result">
+            <h2>Processed Curve Visualization:</h2>
+            <div class="image-container">
+                <img src="{{ url_for('download_image', filename=plot_image) }}" alt="Processed Curve" class="curve-img">
+            </div>
+            <a href="{{ url_for('download_image', filename=plot_image) }}" download="{{ plot_image }}" class="btn">Download Image</a>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>

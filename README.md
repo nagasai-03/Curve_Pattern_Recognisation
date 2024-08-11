@@ -70,7 +70,4 @@ Contributions are welcome! If you'd like to contribute, please follow these step
 You can check the testcases described below
 [testcases](https://drive.google.com/drive/folders/1gxykKWlBKjP66-I5kkKql4OqcpcqhTEH?usp=sharing)
 
-## If you have any doubts contact:
-```bash
-    srmcorporationservices@gmail.com
-```
+
